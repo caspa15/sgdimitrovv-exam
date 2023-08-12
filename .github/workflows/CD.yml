@@ -16,8 +16,9 @@ jobs:
       - name: Deploy to Render
         env:
           RENDER_TOKEN: ${{ secrets.RENDER_TOKEN }}
+          RENDER_HOOK: ${{ secrets.RENDER_HOOK}}
         run: |
-          curl -X POST "https://api.render.com/v1/deploys" \
+          curl -X POST "$RENDER_HOOK" \
             -H "Authorization: Bearer $RENDER_TOKEN" \
             -d "branch=main"
 
