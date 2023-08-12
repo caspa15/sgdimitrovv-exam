@@ -21,11 +21,3 @@ jobs:
           curl -X POST "$RENDER_HOOK" \
             -H "Authorization: Bearer $RENDER_TOKEN" \
             -d "branch=main"
-
-      - name: Update Domain
-        env:
-          RENDER_TOKEN: ${{ secrets.RENDER_TOKEN }}
-        run: |
-          curl -X POST "https://api.render.com/v1/domains/{sgdimitrovv-exam}" \
-            -H "Authorization: Bearer $RENDER_TOKEN" \
-            -d "customDomain={sgdimitrovv-exam}.render.com"
