@@ -1,0 +1,30 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to Render
+        env:
+          RENDER_TOKEN: ${{ secrets.RENDER_TOKEN }}
+        run: |
+          curl -X POST "https://api.render.com/v1/deploys" \
+            -H "Authorization: Bearer $RENDER_TOKEN" \
+            -d "branch=main"
+
+      - name: Update Domain
+        env:
+          RENDER_TOKEN: ${{ secrets.RENDER_TOKEN }}
+        run: |
+          curl -X POST "https://api.render.com/v1/domains/{sgdimitrovv-exam}" \
+            -H "Authorization: Bearer $RENDER_TOKEN" \
+            -d "customDomain={sgdimitrovv-exam}.render.com"
