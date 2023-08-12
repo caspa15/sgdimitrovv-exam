@@ -31,7 +31,7 @@ jobs:
         run: sleep 10
         
       - name: Run unit tests
-        run: npm run tests:unit
+        run: npm run test:unit
 
       - name: Run UI tests
-        run: npm run tests:ui
+        run: npm run test:ui
